@@ -1,0 +1,434 @@
+/* ===== Brittany Chiang 스타일 + 3:7 좌우 분할 ===== */
+:root {
+  --font-sans: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  --navy: #0a192f;
+  --navy-light: #112240;
+  --navy-lighter: #233554;
+  --slate: #ccd6f6;
+  --slate-light: #a8b2d1;
+  --slate-muted: #8892b0;
+  --accent: #64ffda;
+  --accent-dim: rgba(100, 255, 218, 0.7);
+  --white: #e6f1ff;
+  --sidebar-width: 30%;
+  --main-width: 70%;
+  --transition: 0.2s ease;
+  --fz-xxs: 0.75rem;
+  --fz-xs: 0.8rem;
+  --fz-sm: 0.9rem;
+  --fz-md: 1rem;
+  --fz-lg: 1.1rem;
+  --fz-xl: 1.25rem;
+  --fz-xxl: 1.5rem;
+  --fz-big: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fz-md);
+  line-height: 1.6;
+  color: var(--slate);
+  background: var(--navy);
+  min-height: 100vh;
+}
+
+/* 본문 건너뛰기 (접근성) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: var(--navy);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ===== 좌측 사이드바 (30%) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--navy-lighter);
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* 이미지: 왼쪽 레이아웃 전체 채우기 */
+.sidebar-image-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.sidebar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.sidebar-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(to bottom, rgba(10, 25, 47, 0.85) 0%, rgba(10, 25, 47, 0.6) 50%, rgba(10, 25, 47, 0.85) 100%);
+}
+
+.logo {
+  font-size: var(--fz-xl);
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color var(--transition);
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  font-size: var(--fz-xs);
+  color: var(--slate-muted);
+  text-decoration: none;
+  padding: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color var(--transition);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+}
+
+.nav-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  font-size: var(--fz-xxs);
+  min-width: 1.8rem;
+}
+
+.nav-link:hover .nav-num,
+.nav-link.active .nav-num {
+  color: var(--accent);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.sidebar-quote {
+  font-size: var(--fz-xs);
+  color: var(--slate-muted);
+  font-style: italic;
+  margin: 0;
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}
+
+/* ===== 우측 메인 (70%) ===== */
+.main {
+  margin-left: var(--sidebar-width);
+  width: var(--main-width);
+  min-height: 100vh;
+}
+
+.main-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 6rem 3rem 4rem;
+}
+
+/* ===== 섹션 공통 ===== */
+.section {
+  margin-bottom: 5rem;
+}
+
+.section-label {
+  font-size: var(--fz-md);
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+  font-weight: 400;
+}
+
+.big-title {
+  font-size: var(--fz-big);
+  font-weight: 600;
+  color: var(--slate-light);
+  margin: 0 0 0.5rem;
+  line-height: 1.15;
+}
+
+.big-subtitle {
+  font-size: var(--fz-big);
+  font-weight: 600;
+  color: var(--slate-muted);
+  margin: 0 0 1.5rem;
+  line-height: 1.15;
+}
+
+.section-desc {
+  color: var(--slate-muted);
+  margin: 0;
+  max-width: 32rem;
+  font-size: var(--fz-lg);
+}
+
+.section-heading {
+  font-size: var(--fz-xxl);
+  font-weight: 600;
+  color: var(--slate-light);
+  margin: 0 0 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.section-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  font-size: var(--fz-lg);
+}
+
+/* ===== 콘텐츠 블록 ===== */
+.content-block {
+  color: var(--slate-muted);
+}
+
+.content-block p {
+  margin: 0 0 1rem;
+}
+
+.content-block p:last-child {
+  margin-bottom: 0;
+}
+
+.content-block strong {
+  color: var(--slate);
+  font-weight: 600;
+}
+
+.content-block em {
+  font-style: italic;
+  color: var(--slate-light);
+}
+
+.content-block code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  color: var(--accent);
+  background: var(--navy-light);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.content-subheading {
+  font-size: var(--fz-md);
+  font-weight: 600;
+  color: var(--slate-light);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.content-subheading:first-child {
+  margin-top: 0;
+}
+
+.styled-list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.styled-list li {
+  margin-bottom: 0.5rem;
+}
+
+.highlight-block {
+  border-left: 3px solid var(--accent);
+  padding-left: 1.25rem;
+}
+
+.block-quote {
+  font-size: var(--fz-xl);
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 1rem;
+  font-style: normal;
+}
+
+/* ===== 경험 / 포부 ===== */
+.experience-item,
+.vision-item {
+  margin-bottom: 1.5rem;
+}
+
+.experience-item:last-child,
+.vision-item:last-child {
+  margin-bottom: 0;
+}
+
+.experience-title,
+.vision-title {
+  font-size: var(--fz-md);
+  font-weight: 600;
+  color: var(--slate-light);
+  margin: 0 0 0.35rem;
+}
+
+.vision-title {
+  color: var(--accent);
+  font-size: var(--fz-sm);
+}
+
+.experience-item p,
+.vision-item p {
+  margin: 0;
+  color: var(--slate-muted);
+}
+
+/* ===== 메인 푸터 ===== */
+.main-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--navy-lighter);
+  text-align: center;
+  font-size: var(--fz-xs);
+  color: var(--slate-muted);
+}
+
+.main-footer p {
+  margin: 0;
+}
+
+/* ===== 스크롤 시 등장 (JS 연동) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== 반응형: 작은 화면에서 세로 스택 ===== */
+@media (max-width: 968px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--navy-lighter);
+  }
+
+  .sidebar-image-wrap {
+    position: relative;
+    height: 200px;
+  }
+
+  .sidebar-inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1.5rem 1rem;
+    background: var(--navy);
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    order: 3;
+    width: 100%;
+  }
+
+  .sidebar-footer {
+    margin-top: 0;
+    padding-top: 0;
+    margin-left: auto;
+  }
+
+  .sidebar-quote {
+    font-size: 0.7rem;
+    padding-left: 0.75rem;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .main-inner {
+    padding: 2.5rem 1.5rem 3rem;
+  }
+
+  .section-heading {
+    font-size: var(--fz-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-nav {
+    gap: 0.2rem 0.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+  }
+
+  .nav-num {
+    min-width: 1.5rem;
+  }
+
+  .big-title,
+  .big-subtitle {
+    font-size: clamp(1.75rem, 8vw, 2.25rem);
+  }
+}
